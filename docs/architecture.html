@@ -45,27 +45,27 @@
         }
     </script>
     <style type="text/css">
-        .prose { @apply text-slate-900 dark:text-slate-300; line-height: 1.8; letter-spacing: -0.01em; font-size: 1.125rem; }
-        .prose h1 { @apply text-6xl font-bold text-slate-950 dark:text-white mb-12 tracking-tight; }
-        .prose h2 { @apply text-4xl font-semibold text-slate-950 dark:text-white mt-24 mb-10 border-b border-slate-200 dark:border-white/10 pb-6 tracking-tight; }
-        .prose h3 { @apply text-2xl font-bold text-accent mt-16 mb-6 tracking-tight; }
-        .prose p { @apply mb-10 opacity-90; }
-        .prose ul { @apply list-disc list-outside mb-12 ml-6 space-y-6 opacity-90; }
-        .prose ol { @apply list-decimal list-outside mb-12 ml-6 space-y-6 opacity-90; }
+        .prose { @apply text-slate-900 dark:text-slate-300; line-height: 1.7; letter-spacing: -0.01em; font-size: 1.0625rem; }
+        .prose h1 { @apply text-5xl font-bold text-slate-950 dark:text-white mb-10 tracking-tight; }
+        .prose h2 { @apply text-3xl font-semibold text-slate-950 dark:text-white mt-20 mb-8 border-b border-slate-200 dark:border-white/10 pb-5 tracking-tight; }
+        .prose h3 { @apply text-xl font-bold text-accent mt-14 mb-5 tracking-tight; }
+        .prose p { @apply mb-8 opacity-90; }
+        .prose ul { @apply list-disc list-outside mb-10 ml-6 space-y-4 opacity-90; }
+        .prose ol { @apply list-decimal list-outside mb-10 ml-6 space-y-4 opacity-90; }
         .prose code { @apply bg-slate-100 dark:bg-white/10 px-2 py-0.5 rounded-lg text-indigo-600 dark:text-indigo-400 font-mono text-sm border border-slate-200 dark:border-white/5; }
-        .prose pre { @apply bg-slate-950 p-8 rounded-[2.5rem] border border-white/10 shadow-2xl overflow-x-auto mb-16 !important; }
+        .prose pre { @apply bg-slate-950 p-6 rounded-[2rem] border border-white/10 shadow-2xl overflow-x-auto mb-12 !important; }
         .prose pre code { @apply bg-transparent p-0 text-slate-100 border-none !important; }
-        .prose table { @apply w-full border-collapse mb-16 overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-xl; }
-        .prose th { @apply p-6 text-left border-b-2 border-accent text-accent font-bold bg-slate-50 dark:bg-white/5; }
-        .prose td { @apply p-6 border-b border-slate-200 dark:border-white/5 bg-white dark:bg-transparent; }
+        .prose table { @apply w-full border-collapse mb-12 overflow-hidden rounded-[2rem] border border-slate-200 dark:border-white/10 shadow-xl; }
+        .prose th { @apply p-5 text-left border-b-2 border-accent text-accent font-bold bg-slate-50 dark:bg-white/5; }
+        .prose td { @apply p-5 border-b border-slate-200 dark:border-white/5 bg-white dark:bg-transparent; }
         .prose tr:last-child td { @apply border-b-0; }
         .prose tr:hover td { @apply bg-slate-50/50 dark:bg-white/5; }
         .prose a { @apply text-accent hover:text-accent-hover transition-colors decoration-2 underline-offset-8 font-medium; }
         .prose strong { @apply font-bold text-slate-950 dark:text-white; }
-        .prose blockquote { @apply border-l-8 border-accent bg-slate-50 dark:bg-white/5 p-10 rounded-[2.5rem] italic mb-12 text-xl opacity-90; }
+        .prose blockquote { @apply border-l-8 border-accent bg-slate-50 dark:bg-white/5 p-8 rounded-[2rem] italic mb-10 text-lg opacity-90; }
         
         /* Mermaid Styling */
-        .mermaid { @apply bg-white dark:bg-slate-900/30 p-10 rounded-[2.5rem] border border-slate-200 dark:border-white/10 mb-16 flex justify-center shadow-inner; }
+        .mermaid { @apply bg-white dark:bg-slate-900/30 p-8 rounded-[2rem] border border-slate-200 dark:border-white/10 mb-12 flex justify-center shadow-inner; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script>
@@ -108,7 +108,7 @@
         </div>
     </nav>
 
-    <main class="max-w-5xl mx-auto px-6 py-20">
+    <main class="max-w-5xl mx-auto px-6 py-12">
         <article class="prose dark:prose-invert max-w-none">
             <h1>🏗️ Architecture Overview</h1>
             <p class="text-xl font-light leading-relaxed mb-12 opacity-80">Miri is designed as a modular, autonomous system with a focus on local execution, persistent memory, and extensibility.</p>
