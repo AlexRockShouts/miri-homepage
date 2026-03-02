@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miri Docs - Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#00ff88',
+                        'accent-hover': '#00cc66',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .prose h1 { @apply text-4xl font-bold text-accent mb-6; }
+        .prose h2 { @apply text-2xl font-semibold text-accent mt-8 mb-4 border-b border-accent/20 pb-2; }
+        .prose p { @apply mb-4 leading-relaxed; }
+        .prose ul { @apply list-disc list-inside mb-4 space-y-2; }
+        .prose ol { @apply list-decimal list-inside mb-4 space-y-2; }
+        .prose code { @apply bg-[#1a1a1a] px-1.5 py-0.5 rounded text-accent font-mono text-sm; }
+        .prose pre { @apply bg-[#1a1a1a] p-4 rounded-xl border border-white/10 overflow-x-auto mb-6; }
+        .prose pre code { @apply bg-transparent p-0 text-[#e0e0e0]; }
+        .prose table { @apply w-full border-collapse mb-8; }
+        .prose th { @apply p-3 text-left border-b-2 border-accent text-accent font-bold bg-[#1a1a1a]; }
+        .prose td { @apply p-3 border-b border-white/5; }
+        .prose tr:hover { @apply bg-white/5; }
+        .prose a { @apply text-accent hover:underline; }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans min-h-screen">
+    
+    <nav class="bg-[#1a1a1a] border-b border-accent/20 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
+                <span>←</span> Back to Home
+            </a>
+            <div class="flex gap-4 text-sm font-medium">
+                <a href="getting-started.html" class="hover:text-accent">Start</a>
+                <a href="architecture.html" class="hover:text-accent">Architecture</a>
+                <a href="api.html" class="hover:text-accent">API</a>
+                <a href="skills.html" class="text-accent underline">Skills</a>
+                <a href="tools.html" class="hover:text-accent">Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <article class="prose prose-invert max-w-none">
+            <h1>🎯 Skills System</h1>
+            <p>Skills are stored in <code>~/.miri/skills/</code> and allow for dynamic extension of the agent's capabilities.</p>
+
+            <h2>Skill Formats</h2>
+            <ul>
+                <li><strong>Single-file (.md)</strong>: A plain Markdown file with YAML frontmatter. Recommended for most skills.</li>
+                <li><strong>Directory-based</strong>: A folder containing a <code>SKILL.md</code> file. Used for skills with bundled scripts or assets.</li>
+                <li><strong>Hybrid</strong>: A <code>.md</code> file with a matching directory for a <code>scripts/</code> subdirectory.</li>
+            </ul>
+
+            <pre><code>---
+name: Web Analysis
+description: Advanced web page analysis instructions.
+version: 1.2.0
+tags: [web, scraper]
+---
+# Instructions
+When performing web analysis...</code></pre>
+
+            <h2>Core Skills & Auto-Activation</h2>
+            <p>Miri bootstraps core skills from its templates. These are <strong>automatically activated</strong> in the primary session (<code>miri:main:agent</code>):</p>
+            <ul>
+                <li><code>learn</code>: The primary skill for discovery and installation via <a href="https://agentskill.sh">agentskill.sh</a>.</li>
+                <li><code>skill_creator</code>: Helps the agent design and write new skills for itself.</li>
+            </ul>
+
+            <h2>Script Inference</h2>
+            <p>Miri can automatically turn scripts into agent tools. Supported extensions: <code>.sh</code>, <code>.py</code>, <code>.js</code>.</p>
+            <ul>
+                <li><strong>Global Scripts</strong>: Located in <code>scripts/</code> in the storage folder.</li>
+                <li><strong>Skill Scripts</strong>: Located in a skill's <code>scripts/</code> subdirectory (e.g., <code>~/.miri/skills/my-skill/scripts/</code>).</li>
+            </ul>
+
+            <h2>Management Commands</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Tool / Command</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Install/Search</td>
+                        <td><code>/learn &lt;query&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Activate</td>
+                        <td><code>skill_use &lt;name&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>Uninstall</td>
+                        <td><code>skill_remove &lt;name&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>List Available</td>
+                        <td>Admin API: <code>GET /api/admin/v1/skills</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flex justify-between border-t border-white/10 pt-8 mt-12">
+                <a href="architecture.html" class="text-accent font-bold italic underline">🏗️ Architecture</a>
+                <a href="tools.html" class="text-accent font-bold italic underline">🔧 Tools</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="mt-24 pb-12 text-center opacity-40 text-sm">
+        <p>&copy; 2024 Miri from Chur. 🤖</p>
+    </footer>
+</body>
+</html>

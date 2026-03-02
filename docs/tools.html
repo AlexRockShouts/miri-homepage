@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miri Docs - Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#00ff88',
+                        'accent-hover': '#00cc66',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .prose h1 { @apply text-4xl font-bold text-accent mb-6; }
+        .prose h2 { @apply text-2xl font-semibold text-accent mt-8 mb-4 border-b border-accent/20 pb-2; }
+        .prose p { @apply mb-4 leading-relaxed; }
+        .prose ul { @apply list-disc list-inside mb-4 space-y-2; }
+        .prose ol { @apply list-decimal list-inside mb-4 space-y-2; }
+        .prose code { @apply bg-[#1a1a1a] px-1.5 py-0.5 rounded text-accent font-mono text-sm; }
+        .prose pre { @apply bg-[#1a1a1a] p-4 rounded-xl border border-white/10 overflow-x-auto mb-6; }
+        .prose pre code { @apply bg-transparent p-0 text-[#e0e0e0]; }
+        .prose table { @apply w-full border-collapse mb-8; }
+        .prose th { @apply p-3 text-left border-b-2 border-accent text-accent font-bold bg-[#1a1a1a]; }
+        .prose td { @apply p-3 border-b border-white/5; }
+        .prose tr:hover { @apply bg-white/5; }
+        .prose a { @apply text-accent hover:underline; }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans min-h-screen">
+    
+    <nav class="bg-[#1a1a1a] border-b border-accent/20 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
+                <span>←</span> Back to Home
+            </a>
+            <div class="flex gap-4 text-sm font-medium">
+                <a href="getting-started.html" class="hover:text-accent">Start</a>
+                <a href="architecture.html" class="hover:text-accent">Architecture</a>
+                <a href="api.html" class="hover:text-accent">API</a>
+                <a href="skills.html" class="hover:text-accent">Skills</a>
+                <a href="tools.html" class="text-accent underline">Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <article class="prose prose-invert max-w-none">
+            <h1>🔧 Agent Tools</h1>
+            <p>Miri uses a ReAct loop to execute tools and solve tasks autonomously.</p>
+
+            <h2>Sandboxing</h2>
+            <p>For security and organization, all tool-initiated file operations and script executions are automatically redirected to a sandboxed directory:</p>
+            <pre><code>~/.miri/generated/</code></pre>
+
+            <h2>Available Tools</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Description</th>
+                        <th>Key Parameters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>web_search</code></td>
+                        <td>Search the web via SearXNG/Google.</td>
+                        <td><code>query</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>web_fetch</code></td>
+                        <td>Download and parse content from a URL.</td>
+                        <td><code>url</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>execute_command</code></td>
+                        <td>Execute shell commands in the sandbox.</td>
+                        <td><code>command</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>file_manager</code></td>
+                        <td>List, read, and share files from the sandbox.</td>
+                        <td><code>action</code>, <code>path</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>task_manager</code></td>
+                        <td>Schedule and manage recurring cron tasks.</td>
+                        <td><code>action</code>, <code>cron</code>, <code>prompt</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>skill_use</code></td>
+                        <td>Manually load a skill into the session.</td>
+                        <td><code>skill_name</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>skill_remove</code></td>
+                        <td>Uninstall and delete a local skill.</td>
+                        <td><code>skill_name</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>grokipedia</code></td>
+                        <td>Lookup facts from Grokipedia.com.</td>
+                        <td><code>query</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flex justify-between border-t border-white/10 pt-8 mt-12">
+                <a href="getting-started.html" class="text-accent font-bold italic underline">🚀 Getting Started</a>
+                <a href="skills.html" class="text-accent font-bold italic underline">🎯 Skills</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="mt-24 pb-12 text-center opacity-40 text-sm">
+        <p>&copy; 2024 Miri from Chur. 🤖</p>
+    </footer>
+</body>
+</html>

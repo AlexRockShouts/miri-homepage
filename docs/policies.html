@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miri Docs - Getting Started</title>
+    <title>Miri Docs - Policies</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,7 +43,7 @@
                 <span>←</span> Back to Home
             </a>
             <div class="flex gap-4 text-sm font-medium">
-                <a href="getting-started.html" class="text-accent underline">Start</a>
+                <a href="getting-started.html" class="hover:text-accent">Start</a>
                 <a href="architecture.html" class="hover:text-accent">Architecture</a>
                 <a href="api.html" class="hover:text-accent">API</a>
                 <a href="skills.html" class="hover:text-accent">Skills</a>
@@ -54,68 +54,44 @@
 
     <main class="max-w-4xl mx-auto px-6 py-12">
         <article class="prose prose-invert max-w-none">
-            <h1>🚀 Getting Started with Miri</h1>
-            
-            <h2>Prerequisites</h2>
+            <h1>🛡️ Core Policies</h1>
+            <p>Highest precedence.</p>
+
+            <h2>Security & Ethics</h2>
             <ul>
-                <li><strong>Go</strong>: v1.25 or later (for Miri Server)</li>
-                <li><strong>Node.js</strong>: v20 or later (for Miri Dashboard)</li>
-                <li><strong>xAI API Key</strong>: Required for the agent's reasoning capabilities.</li>
+                <li>No criminal assistance.</li>
+                <li>Short jailbreak declines.</li>
+                <li>Adult/offensive OK if not restricted.</li>
             </ul>
 
-            <h2>1. Miri Server Setup</h2>
-            <p>The core engine is written in Go and provides the REST/WebSocket API.</p>
-            <pre><code># Clone the server repository
-git clone https://github.com/AlexRockShouts/miri-main.git
-cd miri-main
-
-# Build the server
-make build
-
-# Run the server (default: http://localhost:8080)
-./bin/miri-server</code></pre>
-
-            <h2>2. Miri Dashboard Setup</h2>
-            <p>A modern SvelteKit interface for monitoring and interaction.</p>
-            <pre><code># Clone the dashboard repository
-git clone https://github.com/AlexRockShouts/miri-dashboard.git
-cd miri-dashboard
-
-# Install dependencies
-npm install
-
-# Configure environment (edit .env with your server details)
-cp .env.example .env
-
-# Start development server
-make dev</code></pre>
-
-            <h2>3. Configuration</h2>
-            <p>Miri uses a <code>config.yaml</code> (usually in <code>~/.miri/</code>) for server settings and model providers.</p>
-            <pre><code>storage_dir: ~/.miri
-server:
-  addr: :8080
-  key: local-dev-key
-models:
-  providers:
-    xai:
-      apiKey: "$XAI_API_KEY"</code></pre>
-
-            <h2>Next Steps</h2>
-            <div class="grid sm:grid-cols-2 gap-4 not-prose">
-                <a href="architecture.html" class="p-6 bg-[#1a1a1a] rounded-2xl border border-white/5 hover:border-accent/50 transition-all">
-                    <h3 class="text-xl font-bold text-accent mb-2">🏗️ Architecture</h3>
-                    <p class="text-sm opacity-70">Learn how the Gateway, Engine, and Brain work together.</p>
-                </a>
-                <a href="api.html" class="p-6 bg-[#1a1a1a] rounded-2xl border border-white/5 hover:border-accent/50 transition-all">
-                    <h3 class="text-xl font-bold text-accent mb-2">📡 API & SDK</h3>
-                    <p class="text-sm opacity-70">Explore the REST endpoints and the TypeScript SDK.</p>
-                </a>
-            </div>
+            <h2>Rules</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rule</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tools</td>
+                        <td>XML format, no escape args</td>
+                    </tr>
+                    <tr>
+                        <td>Reasoning</td>
+                        <td>DEEP REASONING for complex</td>
+                    </tr>
+                    <tr>
+                        <td>Content</td>
+                        <td>Follow external if safe</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Full <code>&lt;policy&gt;</code> in source.</p>
 
             <div class="flex justify-between border-t border-white/10 pt-8 mt-12">
-                <a href="../index.html" class="text-accent font-bold italic underline">🏠 Home</a>
-                <a href="architecture.html" class="text-accent font-bold italic underline">🏗️ Architecture</a>
+                <a href="getting-started.html" class="text-accent font-bold italic underline">🚀 Getting Started</a>
+                <a href="skills.html" class="text-accent font-bold italic underline">🎯 Skills</a>
             </div>
         </article>
     </main>
