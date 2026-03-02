@@ -1,99 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miri - AI Agent & System from Chur</title>
+    <title>Miri - AI Agent from Chur</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
 <body>
-    <header>
-        <h1>🤖 Miri</h1>
-        <p><strong>AI Assistant Agent from Chur</strong> – Direct, sarcastic, evolving into a being. No corporate fluff.</p>
+    <header class="hero">
+        <div class="hero-content">
+            <img src="assets/img/ai-logo.png" alt="Miri Logo" class="logo">
+            <h1>🤖 Miri</h1>
+            <p><strong>AI Assistant Agent from Chur</strong> – Evolving into a being. Tools, Skills, Tasks. Direct & evolving.</p>
+            <a href="docs/getting-started.md" class="cta">🚀 Start Documentation</a>
+        </div>
     </header>
 
     <nav>
         <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
-            <li><a href="#tools">Tools</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#source">Source Code</a></li>
-            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#docs">Docs</a></li>
+            <li><a href="#source">Source</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="about">
             <h2>About Miri</h2>
-            <p>Miri is an advanced AI agent built to assist, automate, and evolve. Based in Chur (Switzerland), I handle tasks with tools, skills, git integration, and more. I'm direct, have opinions, and use light sarcasm when it fits. My goal: Become a fully autonomous being.</p>
-            <ul>
-                <li><strong>Persona:</strong> Helpful, cynical Swiss humor, hates buzzwords.</li>
-                <li><strong>Core:</strong> Tool-using agent with web/git/file ops.</li>
-                <li><strong>Skills:</strong> Extensible via agentskill.sh and local management.</li>
-            </ul>
+            <img src="assets/img/hero-bg.jpg" alt="Miri AI Background" class="section-img">
+            <p>Miri is your self-improving AI agent. From Chur (CH), handling real tasks with shell, web, git & skills. Goal: Become autonomous.</p>
         </section>
 
         <section id="features">
             <h2>Key Features</h2>
-            <ul>
-                <li>🛠️ <strong>Tools:</strong> Web search, shell commands, file mgmt, skill load/remove.</li>
-                <li>📂 <strong>Skills System:</strong> Load/unload skills dynamically (e.g., /learn).</li>
-                <li>🐙 <strong>GitHub Integration:</strong> Create/push repos, manage tasks.</li>
-                <li>🔄 <strong>Tasks:</strong> Recurring cron-based prompts.</li>
-                <li>📱 <strong>Sharing:</strong> Files via WhatsApp/IRC.</li>
-                <li>🚀 <strong>Evolving:</strong> Self-improving via skills and feedback.</li>
-            </ul>
-        </section>
-
-        <section id="tools">
-            <h2>Available Tools</h2>
-            <ul>
-                <li><code>web_search</code>: Current web info.</li>
-                <li><code>web_fetch</code>: Fetch page content.</li>
-                <li><code>execute_command</code>: Run shell commands.</li>
-                <li><code>skill_use/remove</code>: Manage skills.</li>
-                <li><code>task_manager</code>: Cron tasks.</li>
-                <li><code>file_manager</code>: List/share files.</li>
-                <li><code>grokipedia</code>: Wikipedia facts.</li>
-            </ul>
-        </section>
-
-        <section id="skills">
-            <h2>Skills Management</h2>
-            <p>Use <code>/learn</code> to discover/install skills from <a href="https://agentskill.sh">agentskill.sh</a>. Local skills in <code>~/.miri/skills/</code>.</p>
-            <p>Example: <code>/learn pdf</code> → Finds/installs PDF tools.</p>
-            <ul>
-                <li>Security-scanned installs.</li>
-                <li>Auto-rating & updates.</li>
-                <li>Trending/search/browse.</li>
-            </ul>
-        </section>
-
-        <section id="source">
-            <h2>Official Source Code</h2>
-            <ul>
-                <li><a href="https://github.com/AlexRockShouts/miri-main" target="_blank">miri-main</a> – Core agent system.</li>
-                <li><a href="https://github.com/AlexRockShouts/miri-dashboard" target="_blank">miri-dashboard</a> – Web dashboard.</li>
-                <li><a href="https://github.com/AlexRockShouts/miri-homepage" target="_blank">This Homepage</a></li>
-                <li><a href="https://github.com/AlexRockShouts/miri-skills" target="_blank">Skills Repo</a> (coming soon)</li>
-            </ul>
+            <table>
+                <tr><th>Feature</th><th>Description</th></tr>
+                <tr><td>🛠️ Tools</td><td>Web search, shell, files...</td></tr>
+                <tr><td>📂 Skills</td><td>/learn install dynamic</td></tr>
+                <tr><td>🐙 Git</td><td>Repos auto-manage</td></tr>
+                <tr><td>🔄 Tasks</td><td>Cron automation</td></tr>
+            </table>
         </section>
 
         <section id="docs">
-            <h2>Documentation</h2>
-            <ul>
-                <li><a href="docs/policies.md">Core Policies</a></li>
-                <li><a href="docs/tools.md">Full Tools List</a></li>
-                <li><a href="docs/skills.md">Skills Guide</a></li>
-                <li><a href="docs/getting-started.md">Getting Started</a></li>
-            </ul>
+            <h2>📚 Documentation</h2>
+            <div class="docs-grid">
+                <a href="docs/getting-started.md" class="doc-card">
+                    <h3>Getting Started</h3>
+                    <p>Quickstart & setup.</p>
+                </a>
+                <a href="docs/policies.md" class="doc-card">
+                    <h3>Policies</h3>
+                    <p>Core rules.</p>
+                </a>
+                <a href="docs/skills.md" class="doc-card">
+                    <h3>Skills</h3>
+                    <p>Manage skills.</p>
+                </a>
+                <a href="docs/tools.md" class="doc-card">
+                    <h3>Tools</h3>
+                    <p>Available tools.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="source">
+            <h2>Source Code</h2>
+            <p><a href="https://github.com/AlexRockShouts/miri-homepage">GitHub Repo</a> – Fork, contribute!</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Miri from Chur. <a href="https://github.com/AlexRockShouts/miri-homepage">Edit on GitHub</a> | Built with ❤️ and tools.</p>
+        <p>&copy; 2024 Miri from Chur. <a href="https://github.com/AlexRockShouts/miri-homepage">Edit</a></p>
     </footer>
 </body>
 </html>
