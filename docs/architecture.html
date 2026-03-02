@@ -45,49 +45,62 @@
         }
     </script>
     <style type="text/css">
-        .prose { @apply text-slate-900 dark:text-slate-200; line-height: 1.75; letter-spacing: -0.01em; }
-        .prose h1 { @apply text-4xl font-bold text-accent mb-6; letter-spacing: -0.02em; }
-        .prose h2 { @apply text-2xl font-semibold text-accent mt-12 mb-6 border-b border-accent/20 pb-2; letter-spacing: -0.02em; }
-        .prose h3 { @apply text-xl font-semibold text-accent mt-8 mb-4; letter-spacing: -0.01em; }
-        .prose p { @apply mb-6; }
-        .prose ul { @apply list-disc list-outside mb-6 ml-6 space-y-3; }
-        .prose ol { @apply list-decimal list-outside mb-6 ml-6 space-y-3; }
-        .prose code { @apply bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded text-indigo-600 dark:text-indigo-400 font-mono text-sm; }
-        .prose pre { @apply bg-slate-900 p-5 rounded-2xl border border-white/10 shadow-xl overflow-x-auto mb-8 !important; }
-        .prose pre code { @apply bg-transparent p-0 text-slate-100 !important; }
-        .prose table { @apply w-full border-collapse mb-10 overflow-hidden rounded-xl border border-slate-200 dark:border-white/10; }
-        .prose th { @apply p-4 text-left border-b-2 border-accent text-accent font-bold bg-slate-100 dark:bg-white/5; }
-        .prose td { @apply p-4 border-b border-slate-200 dark:border-white/5; }
+        .prose { @apply text-slate-900 dark:text-slate-300; line-height: 1.8; letter-spacing: -0.01em; font-size: 1.125rem; }
+        .prose h1 { @apply text-6xl font-bold text-slate-950 dark:text-white mb-12 tracking-tight; }
+        .prose h2 { @apply text-4xl font-semibold text-slate-950 dark:text-white mt-24 mb-10 border-b border-slate-200 dark:border-white/10 pb-6 tracking-tight; }
+        .prose h3 { @apply text-2xl font-bold text-accent mt-16 mb-6 tracking-tight; }
+        .prose p { @apply mb-10 opacity-90; }
+        .prose ul { @apply list-disc list-outside mb-12 ml-6 space-y-6 opacity-90; }
+        .prose ol { @apply list-decimal list-outside mb-12 ml-6 space-y-6 opacity-90; }
+        .prose code { @apply bg-slate-100 dark:bg-white/10 px-2 py-0.5 rounded-lg text-indigo-600 dark:text-indigo-400 font-mono text-sm border border-slate-200 dark:border-white/5; }
+        .prose pre { @apply bg-slate-950 p-8 rounded-[2.5rem] border border-white/10 shadow-2xl overflow-x-auto mb-16 !important; }
+        .prose pre code { @apply bg-transparent p-0 text-slate-100 border-none !important; }
+        .prose table { @apply w-full border-collapse mb-16 overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-white/10 shadow-xl; }
+        .prose th { @apply p-6 text-left border-b-2 border-accent text-accent font-bold bg-slate-50 dark:bg-white/5; }
+        .prose td { @apply p-6 border-b border-slate-200 dark:border-white/5 bg-white dark:bg-transparent; }
         .prose tr:last-child td { @apply border-b-0; }
-        .prose tr:hover { @apply bg-slate-50 dark:bg-white/5; }
-        .prose a { @apply text-accent hover:underline decoration-2 underline-offset-4; }
-        .prose strong { @apply font-bold text-slate-900 dark:text-white; }
-        .prose blockquote { @apply border-l-4 border-accent bg-slate-50 dark:bg-white/5 p-4 rounded-r-lg italic mb-6; }
+        .prose tr:hover td { @apply bg-slate-50/50 dark:bg-white/5; }
+        .prose a { @apply text-accent hover:text-accent-hover transition-colors decoration-2 underline-offset-8 font-medium; }
+        .prose strong { @apply font-bold text-slate-950 dark:text-white; }
+        .prose blockquote { @apply border-l-8 border-accent bg-slate-50 dark:bg-white/5 p-10 rounded-[2.5rem] italic mb-12 text-xl opacity-90; }
+        
+        /* Mermaid Styling */
+        .mermaid { @apply bg-white dark:bg-slate-900/30 p-10 rounded-[2.5rem] border border-slate-200 dark:border-white/10 mb-16 flex justify-center shadow-inner; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Inter',
+            flowchart: { useMaxWidth: true, htmlLabels: true }
+        });
+    </script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
 <body class="bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-[#e0e0e0] font-sans min-h-screen transition-colors duration-300">
     
-    <nav class="bg-slate-100/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border-b border-slate-200 dark:border-accent/20 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
-                <span>←</span> Back to Home
+    <nav class="bg-slate-100/70 dark:bg-[#1a1a1a]/70 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-all group">
+                <span class="group-hover:-translate-x-1 transition-transform">←</span> Back to Home
             </a>
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex gap-4 text-sm font-medium">
-                    <a href="getting-started.html" class="hover:text-accent">Start</a>
-                    <a href="architecture.html" class="hover:text-accent underline">Architecture</a>
-                    <a href="dashboard.html" class="hover:text-accent">Dashboard</a>
-                    <a href="api.html" class="hover:text-accent">API</a>
-                    <a href="skills.html" class="hover:text-accent">Skills</a>
-                    <a href="tools.html" class="hover:text-accent">Tools</a>
-                    <a href="policies.html" class="hover:text-accent">Policies</a>
+            <div class="flex items-center gap-8">
+                <div class="hidden md:flex gap-6 text-sm font-medium">
+                    <a href="getting-started.html" class="hover:text-accent transition-colors">Start</a>
+                    <a href="architecture.html" class="text-accent underline underline-offset-8 decoration-2">Architecture</a>
+                    <a href="dashboard.html" class="hover:text-accent transition-colors">Dashboard</a>
+                    <a href="api.html" class="hover:text-accent transition-colors">API</a>
+                    <a href="skills.html" class="hover:text-accent transition-colors">Skills</a>
+                    <a href="tools.html" class="hover:text-accent transition-colors">Tools</a>
+                    <a href="policies.html" class="hover:text-accent transition-colors">Policies</a>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-[#0a0a0a] hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button onclick="toggleTheme()" class="p-2.5 rounded-2xl bg-slate-200 dark:bg-white/5 hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-[#0a0a0a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
                 </button>
@@ -95,31 +108,90 @@
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-6 py-12">
+    <main class="max-w-5xl mx-auto px-6 py-20">
         <article class="prose dark:prose-invert max-w-none">
             <h1>🏗️ Architecture Overview</h1>
-            <p>Miri is designed as a modular, autonomous system with a focus on local execution, persistent memory, and extensibility.</p>
+            <p class="text-xl font-light leading-relaxed mb-12 opacity-80">Miri is designed as a modular, autonomous system with a focus on local execution, persistent memory, and extensibility.</p>
 
-            <div class="bg-slate-50 dark:bg-[#1a1a1a] p-8 rounded-[2.5rem] border border-slate-200 dark:border-accent/20 my-12">
-                <h3 class="mt-0">The Eino Graph: Autonomous Flow</h3>
-                <p class="text-sm opacity-70 mb-6">Miri's core logic is modeled as a directed graph using the Eino framework. Each interaction traverses these specialized nodes:</p>
-                <ul class="space-y-4 list-none">
-                    <li class="flex items-start gap-3">
-                        <span class="text-accent font-bold text-lg">1.</span>
+            <div class="mermaid">
+                flowchart TD
+                  subgraph Client
+                    UI[Webapp / Dashboard]
+                    SDK[TypeScript SDK]
+                  end
+
+                  UI -->|"HTTP / WS"| REST["HTTP Server (Gin)"]
+                  SDK -->|HTTP| REST
+
+                  REST -->|"/api/v1, /ws"| GW[Gateway]
+                  REST -->|/api/admin/v1| GW
+
+                  GW --> AG[Agent]
+                  GW --> CH["Channels (WhatsApp, IRC)"]
+                  CH -->|incoming/outgoing| GW
+
+                  AG --> EN["Engine (Eino Graph)"]
+                  EN --> TL[Tools]
+                  EN --> SL[SkillLoader]
+                  EN --> CR[CronManager]
+                  EN --> BR[Brain]
+
+                  SL --> SK["Skills (~/.miri/skills)"]
+                  TL --> FS[("Sandboxed FS: ~/.miri/generated")]
+                  BR --> VM[("Vector DB (chromem-go)")]
+
+                  GW --> ST[("Storage ~/.miri")]
+                  EN --> ST
+                  CR --> ST
+                  BR --> ST
+                  CR -.->|runs tasks| AG
+            </div>
+
+            <div class="bg-slate-50 dark:bg-[#111111] p-10 rounded-[3rem] border border-slate-200 dark:border-white/5 my-16 shadow-2xl">
+                <h3 class="mt-0 text-3xl font-bold mb-8">The Eino Graph: Autonomous Flow</h3>
+                <p class="text-lg opacity-70 mb-10 leading-relaxed">Miri's core logic is modeled as a directed graph using the Eino framework. Each interaction traverses these specialized nodes:</p>
+                
+                <div class="mermaid">
+                    graph LR
+                        Start((Input)) --> Retriever[Retriever Node]
+                        Retriever --> Agent{Agent Node}
+                        Agent -- Tool Call --> Tools[Tools Node]
+                        Tools --> Agent
+                        Agent -- Final Answer --> Brain[Brain Node]
+                        Brain --> End((Output))
+                        
+                        subgraph Context Injection
+                            Retriever
+                        end
+                        subgraph Reasoning Loop
+                            Agent
+                            Tools
+                        end
+                        subgraph Memory Maintenance
+                            Brain
+                        end
+                </div>
+
+                <ul class="space-y-8 list-none ml-0">
+                    <li class="flex items-start gap-5">
+                        <span class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-bold shrink-0 mt-1">1</span>
                         <div>
-                            <strong>Retriever Node</strong>: Proactively queries the <strong>Brain</strong> for relevant facts and summaries based on the user's prompt. It injects this context directly into the system message.
+                            <strong class="text-xl block mb-2 dark:text-white">Retriever Node</strong>
+                            <p class="leading-relaxed opacity-80">Proactively queries the <strong>Brain</strong> for relevant facts and summaries based on the user's prompt. It injects this context directly into the system message.</p>
                         </div>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-accent font-bold text-lg">2.</span>
+                    <li class="flex items-start gap-5">
+                        <span class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-bold shrink-0 mt-1">2</span>
                         <div>
-                            <strong>Agent Node</strong>: The central ReAct (Reasoning + Acting) loop. It evaluates the prompt + context, decides on tool calls, executes them, and iterates until a final answer is reached.
+                            <strong class="text-xl block mb-2 dark:text-white">Agent Node</strong>
+                            <p class="leading-relaxed opacity-80">The central ReAct (Reasoning + Acting) loop. It evaluates the prompt + context, decides on tool calls, executes them, and iterates until a final answer is reached.</p>
                         </div>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-accent font-bold text-lg">3.</span>
+                    <li class="flex items-start gap-5">
+                        <span class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent font-bold shrink-0 mt-1">3</span>
                         <div>
-                            <strong>Brain Node</strong>: An asynchronous post-processor. It captures the interaction, updates the message buffer, monitors token usage, and triggers the <strong>Maintenance Loop</strong>.
+                            <strong class="text-xl block mb-2 dark:text-white">Brain Node</strong>
+                            <p class="leading-relaxed opacity-80">An asynchronous post-processor. It captures the interaction, updates the message buffer, monitors token usage, and triggers the <strong>Maintenance Loop</strong>.</p>
                         </div>
                     </li>
                 </ul>
