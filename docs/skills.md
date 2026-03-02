@@ -1,16 +1,22 @@
 # 🎯 Skills
 
-In ~/.miri/skills/.
+Local: ~/.miri/skills/.
 
-## Commands
-- **Search/Install**: /learn <query>
-- **Load**: skill_use <name>
-- **List**: ls ~/.miri/skills/
-- **Remove**: skill_remove <name>
+## Management
+| Action | Command |
+|--------|---------|
+| List | ls ~/.miri/skills/ |
+| Load | skill_use <name> |
+| Remove | skill_remove <name> |
+| Learn | /learn <query> |
 
-## Learn Example
-/learn trending → Install top Skills.
+## Learn Skill (loaded)
+Search/install from agentskill.sh.
 
-Security auto-scan.
+**Commands**:
+- /learn query – Search
+- /learn trending – Trending
+- /learn list – Installed
+- /learn update – Updates
 
-[Tools](/tools.md)
+Security scan auto.

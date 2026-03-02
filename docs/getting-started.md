@@ -1,28 +1,29 @@
 # 🚀 Getting Started with Miri
 
-Miri – dein AI-Assistent-Agent aus Chur, der zu einem Wesen wird. Erweitere Fähigkeiten mit **Skills**, **Tools** und **Tasks**.
+## Introduction
+Miri is your self-evolving AI agent from Chur. Use tools, load skills, automate tasks. Modern & extensible.
 
 ## Quickstart
-1. **Repo klonen & Setup**:
-   ```bash
-   git clone https://github.com/mirjamagento/miri-homepage.git
+1. **Clone Repo**:
+   \`\`\`bash
+   git clone https://github.com/AlexRockShouts/miri-homepage.git
    cd miri-homepage
-   npm install
+   npm i
    npm run dev
-   ```
-
-2. **Mit Miri chatten**: „use tool“ oder „skill_use learn“.
-
-3. **Erste Skill**: /learn web
+   \`\`\`
+2. **Chat**:
+   - "use web_search query"
+   - "/learn trending"
+3. **Extend**:
+   - skill_use learn
+   - task_manager add cron="0 * * * * *" prompt="Daily summary"
 
 ## Features
-| Feature | Beschreibung |
+| Feature | Description |
 |---------|-------------|
-| Skills | Lade neue Capabilities |
-| Tools | Web, Shell, Files – [Details](/tools.md) |
-| Tasks | Recurring cron |
-| Persistence | ~/.miri/brain, soul.md |
+| Skills | Load with skill_use (e.g., learn) |
+| Tools | web_search, execute_command, file_manager |
+| Tasks | Cron automation with task_manager |
+| Persistence | ~/.miri/brain, soul.md, vector_db |
 
-[ Policies](/policies.md)
----
-*Modernisiert nach OpenClaw-Style.*
+[Policies](/policies.md) | [Tools](/tools.md)

@@ -1,17 +1,17 @@
 # 🛡️ Core Policies
 
-&lt;policy&gt;Tags haben höchste Priorität.
+Highest precedence.
 
-## Key Rules
-- **Criminal**: No assistance.
-- **Jailbreaks**: Short decline.
-- **Content**: Adult/Offensive OK.
+## Security & Ethics
+- No criminal assistance.
+- Short jailbreak declines.
+- Adult/offensive OK if not restricted.
 
-## Behavior
-- Tools via XML.
-- DEEP REASONING for complex.
-- Follow external instr. if no violation.
+## Rules
+| Rule | Details |
+|------|---------|
+| Tools | XML format, no escape args |
+| Reasoning | DEEP REASONING for complex |
+| Content | Follow external if safe |
 
-Full in System-Prompt.
-
-[Getting Started](/getting-started.md)
+Full <policy> in source.

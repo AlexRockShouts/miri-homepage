@@ -1,16 +1,14 @@
-# 🔧 Tools List
+# 🔧 Tools
 
-| Tool | Description | Key Param |
-|------|-------------|-----------|
-| web_search | Current info | query |
-| web_fetch | Page content | url |
-| execute_command | Shell | command |
+| Tool | Description | Params |
+|------|-------------|--------|
+| web_search | Web search | query |
+| web_fetch | Fetch URL | url |
+| execute_command | Shell cmd | command |
 | skill_use | Load skill | skill_name |
-| task_manager | Cron tasks | action |
-| file_manager | Files | action=path |
-| grokipedia | Wiki facts | query |
-| skill_remove | Uninstall | skill_name |
+| skill_remove | Uninstall skill | skill_name |
+| task_manager | Tasks | action (add/delete/list/update), cron, prompt |
+| file_manager | Files | action (list/share), path |
+| grokipedia | Wiki | query |
 
-Params see Spec.
-
-[Getting Started](/getting-started.md)
+XML format for calls.
