@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miri - AI Agent from Chur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,10 +14,32 @@
             theme: {
                 extend: {
                     colors: {
-                        accent: '#00ff88',
-                        'accent-hover': '#00cc66',
+                        accent: '#6366f1',
+                        'accent-hover': '#4f46e5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
+            }
+        }
+    </script>
+    <script>
+        // Theme Toggle Logic
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
             }
         }
     </script>
@@ -30,24 +55,36 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.1), transparent);
             animation: shimmer 3s infinite;
             pointer-events: none;
+        }
+
+        /* Improved typography and readability */
+        .prose {
+            line-height: 1.75;
+            letter-spacing: -0.01em;
+        }
+        .prose h1, .prose h2, .prose h3 {
+            letter-spacing: -0.02em;
+        }
+        .prose pre {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
-<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans transition-colors duration-300">
+<body class="bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-[#e0e0e0] font-sans transition-colors duration-300">
     
     <!-- Hero Section -->
     <header class="relative h-[60vh] flex items-center justify-center text-center overflow-hidden border-b-4 border-accent">
         <div class="absolute inset-0 z-0">
-            <img src="assets/img/hero-bg.jpg" alt="Background" class="w-full h-full object-cover">
+            <img src="assets/img/chur-bg.jpg" alt="Background" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
         <div class="relative z-10 p-6 max-w-2xl shimmer">
-            <img src="assets/img/ai-logo.png" alt="Miri Logo" class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-accent shadow-lg shadow-accent/20">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-accent to-[#00cc66] bg-clip-text text-transparent">🤖 Miri</h1>
+            <img src="assets/img/miri.jpeg" alt="Miri Logo" class="w-24 h-24 mx-auto mb-4 border-2 border-accent shadow-lg shadow-accent/20 object-contain bg-white/5">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-accent to-[#4f46e5] bg-clip-text text-transparent">🤖 Miri</h1>
             <p class="text-xl md:text-2xl opacity-95 mb-8">
                 <span class="font-bold text-accent">AI Assistant Agent from Chur</span> – Evolving into a being. Tools, Skills, Tasks. Direct & evolving.
             </p>
@@ -59,41 +96,54 @@
 
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- Navigation -->
-        <nav class="sticky top-4 z-50 bg-[#1a1a1a] p-4 rounded-2xl shadow-2xl border border-white/5 mb-16">
+        <nav class="sticky top-4 z-50 bg-slate-100/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-slate-200 dark:border-white/5 mb-16 flex justify-between items-center">
             <ul class="flex justify-center gap-4 md:gap-8 flex-wrap">
                 <li><a href="#about" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">About</a></li>
                 <li><a href="#features" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">Features</a></li>
                 <li><a href="#docs" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">Docs</a></li>
                 <li><a href="docs/architecture.html" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">Architecture</a></li>
+                <li><a href="docs/dashboard.html" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">Dashboard</a></li>
                 <li><a href="docs/api.html" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">API</a></li>
                 <li><a href="#source" class="px-4 py-2 rounded-lg hover:bg-accent hover:text-[#0a0a0a] transition-all font-medium">Source</a></li>
             </ul>
+            <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-[#0a0a0a] hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-[#0a0a0a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+            </button>
         </nav>
 
         <main class="space-y-16">
             <!-- About Section -->
-            <section id="about" class="bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl transform transition-all duration-700">
+            <section id="about" class="bg-slate-50 dark:bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl transform transition-all duration-700">
                 <h2 class="text-4xl font-bold text-accent mb-8 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-accent">About Miri Ecosystem</h2>
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div class="space-y-4">
                         <p class="text-lg leading-relaxed">
-                            Miri is a high-performance, autonomous AI agent ecosystem from Chur (CH). It consists of a powerful Go-based server, a modern SvelteKit dashboard, and a unified memory system.
+                            Miri is a high-performance, autonomous AI agent ecosystem from Chur (CH). It is built on a sophisticated <strong>Cognitive Architecture</strong> that separates identity (The Soul) from knowledge (The Brain).
                         </p>
                         <p class="text-lg leading-relaxed">
-                            With real-time tool execution, script inference, and a cognitive "Brain" for long-term memory, Miri evolves through interaction.
+                            Powered by the <strong>Eino Graph Engine</strong>, Miri performs real-time reasoning through the <strong>Mole-Syn</strong> framework, allowing it to evolve from a simple assistant into a distinct digital being.
                         </p>
+                        <div class="pt-4 flex gap-4">
+                             <a href="docs/architecture.html" class="text-accent hover:underline font-bold">Read Architecture →</a>
+                             <a href="docs/api.html" class="text-accent hover:underline font-bold">Explore API →</a>
+                        </div>
                     </div>
                     <div class="overflow-hidden rounded-2xl border border-white/5">
-                        <img src="assets/img/hero-bg.jpg" alt="Miri AI Background" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
+                        <img src="assets/img/chur-bg.jpg" alt="Miri AI Background" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
                     </div>
                 </div>
             </section>
 
             <!-- Key Features Section -->
-            <section id="features" class="bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
+            <section id="features" class="bg-slate-50 dark:bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
                 <h2 class="text-4xl font-bold text-accent mb-8 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-accent">Core Ecosystem</h2>
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5">
+                    <div class="bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5">
                         <h3 class="text-xl font-bold text-accent mb-2">🚀 Miri Server</h3>
                         <p class="text-sm opacity-80 mb-4">Autonomous Go service with Eino Graph Engine, REST/WS API, and multi-channel support (WhatsApp, IRC).</p>
                         <ul class="text-xs space-y-1 opacity-60">
@@ -102,7 +152,7 @@
                             <li>• Persistent Checkpointing</li>
                         </ul>
                     </div>
-                    <div class="bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5">
+                    <div class="bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5">
                         <h3 class="text-xl font-bold text-accent mb-2">📊 Miri Dashboard</h3>
                         <p class="text-sm opacity-80 mb-4">Modern SvelteKit 5 web interface for real-time monitoring, session management, and reactive chat.</p>
                         <ul class="text-xs space-y-1 opacity-60">
@@ -111,7 +161,7 @@
                             <li>• Admin Health Overview</li>
                         </ul>
                     </div>
-                    <div class="bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5">
+                    <div class="bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5">
                         <h3 class="text-xl font-bold text-accent mb-2">🧠 The Brain</h3>
                         <p class="text-sm opacity-80 mb-4">Advanced cognitive architecture (Mole-Syn) and long-term memory using persistent vector storage.</p>
                         <ul class="text-xs space-y-1 opacity-60">
@@ -124,30 +174,34 @@
             </section>
 
             <!-- Documentation Section -->
-            <section id="docs" class="bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
+            <section id="docs" class="bg-slate-50 dark:bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
                 <h2 class="text-4xl font-bold text-accent mb-8 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-accent">📚 Documentation</h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <a href="docs/getting-started.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/getting-started.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Getting Started</h3>
                         <p class="text-sm opacity-70">Server build, Dashboard setup & basic configuration.</p>
                     </a>
-                    <a href="docs/architecture.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/architecture.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Architecture</h3>
                         <p class="text-sm opacity-70">System overview, Eino Graphs & cognitive maintenance.</p>
                     </a>
-                    <a href="docs/api.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/api.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">API & SDK</h3>
                         <p class="text-sm opacity-70">REST endpoints, WebSockets & TypeScript SDK usage.</p>
                     </a>
-                    <a href="docs/skills.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/dashboard.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Dashboard</h3>
+                        <p class="text-sm opacity-70">SvelteKit interface, real-time chat & memory viewer.</p>
+                    </a>
+                    <a href="docs/skills.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Skills System</h3>
                         <p class="text-sm opacity-70">Learn skill, script inference & auto-activation.</p>
                     </a>
-                    <a href="docs/tools.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/tools.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Tools & Sandbox</h3>
                         <p class="text-sm opacity-70">Available agent tools & sandboxed file-system.</p>
                     </a>
-                    <a href="docs/policies.html" class="group bg-[#0a0a0a]/50 p-6 rounded-2xl border border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
+                    <a href="docs/policies.html" class="group bg-white dark:bg-[#0a0a0a]/50 p-6 rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all hover:-translate-y-2">
                         <h3 class="text-xl font-bold mb-2 group-hover:text-accent">Policies</h3>
                         <p class="text-sm opacity-70">Core safety rules & interaction guidelines.</p>
                     </a>
@@ -155,7 +209,7 @@
             </section>
 
             <!-- Source Code Section -->
-            <section id="source" class="bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
+            <section id="source" class="bg-slate-50 dark:bg-[#1a1a1a] p-8 md:p-12 rounded-[2.5rem] border-l-8 border-accent shadow-xl">
                 <h2 class="text-4xl font-bold text-accent mb-8 relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-accent">Source Code</h2>
                 <p class="text-lg">
                     <a href="https://github.com/AlexRockShouts/miri-homepage" class="text-accent hover:underline decoration-2 underline-offset-4 font-bold italic">GitHub Repo</a> – Fork, contribute!

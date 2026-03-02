@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miri Docs - Getting Started</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,49 +15,88 @@
             theme: {
                 extend: {
                     colors: {
-                        accent: '#00ff88',
-                        'accent-hover': '#00cc66',
+                        accent: '#6366f1',
+                        'accent-hover': '#4f46e5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
+    <script>
+        // Theme Toggle Logic
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
     <style type="text/css">
-        .prose h1 { @apply text-4xl font-bold text-accent mb-6; }
-        .prose h2 { @apply text-2xl font-semibold text-accent mt-8 mb-4 border-b border-accent/20 pb-2; }
-        .prose p { @apply mb-4 leading-relaxed; }
-        .prose ul { @apply list-disc list-inside mb-4 space-y-2; }
-        .prose ol { @apply list-decimal list-inside mb-4 space-y-2; }
-        .prose code { @apply bg-[#1a1a1a] px-1.5 py-0.5 rounded text-accent font-mono text-sm; }
-        .prose pre { @apply bg-[#1a1a1a] p-4 rounded-xl border border-white/10 overflow-x-auto mb-6; }
-        .prose pre code { @apply bg-transparent p-0 text-[#e0e0e0]; }
-        .prose table { @apply w-full border-collapse mb-8; }
-        .prose th { @apply p-3 text-left border-b-2 border-accent text-accent font-bold bg-[#1a1a1a]; }
-        .prose td { @apply p-3 border-b border-white/5; }
-        .prose tr:hover { @apply bg-white/5; }
-        .prose a { @apply text-accent hover:underline; }
+        .prose { @apply text-slate-900 dark:text-slate-200; line-height: 1.75; letter-spacing: -0.01em; }
+        .prose h1 { @apply text-4xl font-bold text-accent mb-6; letter-spacing: -0.02em; }
+        .prose h2 { @apply text-2xl font-semibold text-accent mt-12 mb-6 border-b border-accent/20 pb-2; letter-spacing: -0.02em; }
+        .prose h3 { @apply text-xl font-semibold text-accent mt-8 mb-4; letter-spacing: -0.01em; }
+        .prose p { @apply mb-6; }
+        .prose ul { @apply list-disc list-outside mb-6 ml-6 space-y-3; }
+        .prose ol { @apply list-decimal list-outside mb-6 ml-6 space-y-3; }
+        .prose code { @apply bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded text-indigo-600 dark:text-indigo-400 font-mono text-sm; }
+        .prose pre { @apply bg-slate-900 p-5 rounded-2xl border border-white/10 shadow-xl overflow-x-auto mb-8 !important; }
+        .prose pre code { @apply bg-transparent p-0 text-slate-100 !important; }
+        .prose table { @apply w-full border-collapse mb-10 overflow-hidden rounded-xl border border-slate-200 dark:border-white/10; }
+        .prose th { @apply p-4 text-left border-b-2 border-accent text-accent font-bold bg-slate-100 dark:bg-white/5; }
+        .prose td { @apply p-4 border-b border-slate-200 dark:border-white/5; }
+        .prose tr:last-child td { @apply border-b-0; }
+        .prose tr:hover { @apply bg-slate-50 dark:bg-white/5; }
+        .prose a { @apply text-accent hover:underline decoration-2 underline-offset-4; }
+        .prose strong { @apply font-bold text-slate-900 dark:text-white; }
+        .prose blockquote { @apply border-l-4 border-accent bg-slate-50 dark:bg-white/5 p-4 rounded-r-lg italic mb-6; }
     </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
-<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans min-h-screen">
+<body class="bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-[#e0e0e0] font-sans min-h-screen transition-colors duration-300">
     
-    <nav class="bg-[#1a1a1a] border-b border-accent/20 sticky top-0 z-50">
+    <nav class="bg-slate-100/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border-b border-slate-200 dark:border-accent/20 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
                 <span>←</span> Back to Home
             </a>
-            <div class="flex gap-4 text-sm font-medium">
-                <a href="getting-started.html" class="text-accent underline">Start</a>
-                <a href="architecture.html" class="hover:text-accent">Architecture</a>
-                <a href="api.html" class="hover:text-accent">API</a>
-                <a href="skills.html" class="hover:text-accent">Skills</a>
-                <a href="tools.html" class="hover:text-accent">Tools</a>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex gap-4 text-sm font-medium">
+                    <a href="getting-started.html" class="hover:text-accent underline">Start</a>
+                    <a href="architecture.html" class="hover:text-accent">Architecture</a>
+                    <a href="dashboard.html" class="hover:text-accent">Dashboard</a>
+                    <a href="api.html" class="hover:text-accent">API</a>
+                    <a href="skills.html" class="hover:text-accent">Skills</a>
+                    <a href="tools.html" class="hover:text-accent">Tools</a>
+                    <a href="policies.html" class="hover:text-accent">Policies</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-[#0a0a0a] hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-[#0a0a0a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        <article class="prose prose-invert max-w-none">
+        <article class="prose dark:prose-invert max-w-none">
             <h1>🚀 Getting Started with Miri</h1>
             
             <h2>Prerequisites</h2>
@@ -65,7 +108,7 @@
 
             <h2>1. Miri Server Setup</h2>
             <p>The core engine is written in Go and provides the REST/WebSocket API.</p>
-            <pre><code># Clone the server repository
+            <pre><code class="language-bash"># Clone the server repository
 git clone https://github.com/AlexRockShouts/miri-main.git
 cd miri-main
 
@@ -77,37 +120,159 @@ make build
 
             <h2>2. Miri Dashboard Setup</h2>
             <p>A modern SvelteKit interface for monitoring and interaction.</p>
-            <pre><code># Clone the dashboard repository
+            <pre><code class="language-bash"># Clone the dashboard repository
 git clone https://github.com/AlexRockShouts/miri-dashboard.git
 cd miri-dashboard
 
 # Install dependencies
 npm install
 
-# Configure environment (edit .env with your server details)
+# Link local SDK (if necessary, see below)
+# Update package.json to point to your local @miri/sdk path
+# "dependencies": { "@miri/sdk": "link:../miri-main/api/sdk/typescript" }
+
+# Configure environment
 cp .env.example .env
 
 # Start development server
 make dev</code></pre>
 
+            <h3>Dashboard Configuration (.env)</h3>
+            <p>Edit the <code>.env</code> file to connect the dashboard to your Miri Server:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>PUBLIC_MIRI_SERVER_URL</code></td>
+                        <td>The base URL of your Miri Server.</td>
+                        <td><code>http://localhost:8080</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>MIRI_SERVER_KEY</code></td>
+                        <td>The <code>server.key</code> from your <code>config.yaml</code>.</td>
+                        <td><code>your-secret-key</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>MIRI_ADMIN_USER</code></td>
+                        <td>The <code>server.admin_user</code> from your <code>config.yaml</code>.</td>
+                        <td><code>admin</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>MIRI_ADMIN_PASSWORD</code></td>
+                        <td>The <code>server.admin_pass</code> from your <code>config.yaml</code>.</td>
+                        <td><code>admin-password</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <h2>3. Configuration</h2>
-            <p>Miri uses a <code>config.yaml</code> (usually in <code>~/.miri/</code>) for server settings and model providers.</p>
-            <pre><code>storage_dir: ~/.miri
+            <p>Miri uses a <code>config.yaml</code> (usually in <code>~/.miri/</code>) for server settings and model providers. It supports environment variable substitution.</p>
+            <pre><code class="language-yaml">storage_dir: ~/.miri
+
 server:
   addr: :8080
-  key: local-dev-key
+  key: "your-server-key" # X-Server-Key for standard API
+  admin_user: "admin"    # Basic Auth username for Admin API
+  admin_pass: "secret"   # Basic Auth password for Admin API
+
 models:
+  mode: merge
   providers:
     xai:
-      apiKey: "$XAI_API_KEY"</code></pre>
+      baseUrl: "https://api.x.ai/v1"
+      apiKey: "$XAI_API_KEY"
+      api: "openai"
+      models:
+        - id: "xai/grok-4-1-fast-reasoning"
+          name: "grok-4-1-fast-reasoning"
+          contextWindow: 2000000
+    huggingface:
+      baseUrl: "https://api-inference.huggingface.co/v1/"
+      apiKey: "$HF_TOKEN"
+      api: "openai"
+
+agents:
+  defaults:
+    model:
+      primary: "xai/grok-4-1-fast-reasoning"</code></pre>
+
+            <h2>4. Startup & Deployment</h2>
+            <p>While you can run Miri manually, it is recommended to run it as a background service for continuous operation.</p>
+
+            <h3>Linux (systemd)</h3>
+            <p>Create a service file (e.g., <code>/etc/systemd/system/miri@user.service</code>) using the provided template:</p>
+            <pre><code class="language-bash">sudo cp templates/systemd/miri.service /etc/systemd/system/miri@$(whoami).service
+sudo systemctl daemon-reload
+sudo systemctl enable miri@$(whoami)
+sudo systemctl start miri@$(whoami)</code></pre>
+
+            <h3>macOS (launchd)</h3>
+            <p>Copy the plist template to your LaunchAgents directory:</p>
+            <pre><code class="language-bash">mkdir -p ~/Library/LaunchAgents
+cp templates/launchd/com.miri.agent.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.miri.agent.plist</code></pre>
+
+            <h3>Windows (NSSM)</h3>
+            <p>Use NSSM to install Miri as a Windows service:</p>
+            <pre><code class="language-bash">nssm install Miri "C:\path\to\miri.exe"
+nssm start Miri</code></pre>
+
+            <h2>Environment Variables</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>MIRI_STORAGE_DIR</code></td>
+                        <td>Base directory for all data (soul, brain, skills).</td>
+                        <td><code>~/.miri</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>XAI_API_KEY</code></td>
+                        <td>Your xAI API key (if not set in config).</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>PORT</code></td>
+                        <td>Override the server port.</td>
+                        <td><code>8080</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>First Run: Bootstrapping</h2>
+            <p>On its first run, Miri creates a "personality" and a toolset in your storage directory:</p>
+            <ul>
+                <li><strong>Soul</strong>: Copies <code>templates/soul.md</code> to <code>~/.miri/soul.md</code>. You can edit this to change Miri's personality.</li>
+                <li><strong>Skills</strong>: Copies core skills (<code>learn</code>, <code>skill_creator</code>) to <code>~/.miri/skills/</code>.</li>
+                <li><strong>Memory</strong>: Initializes a fresh vector database in <code>~/.miri/vector_db/</code>.</li>
+            </ul>
+
+            <h2>Authentication Methods</h2>
+            <ul>
+                <li><strong>Server Key</strong>: Pass via <code>X-Server-Key</code> header for all <code>/api/v1/*</code> endpoints.</li>
+                <li><strong>Basic Auth</strong>: Use configured <code>admin_user</code> and <code>admin_pass</code> for all <code>/api/admin/v1/*</code> endpoints.</li>
+                <li><strong>WebSocket</strong>: Use the <code>miri-key</code> sub-protocol or <code>token</code> query parameter.</li>
+            </ul>
 
             <h2>Next Steps</h2>
             <div class="grid sm:grid-cols-2 gap-4 not-prose">
-                <a href="architecture.html" class="p-6 bg-[#1a1a1a] rounded-2xl border border-white/5 hover:border-accent/50 transition-all">
+                <a href="architecture.html" class="p-6 bg-slate-50 dark:bg-[#1a1a1a] rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all">
                     <h3 class="text-xl font-bold text-accent mb-2">🏗️ Architecture</h3>
                     <p class="text-sm opacity-70">Learn how the Gateway, Engine, and Brain work together.</p>
                 </a>
-                <a href="api.html" class="p-6 bg-[#1a1a1a] rounded-2xl border border-white/5 hover:border-accent/50 transition-all">
+                <a href="api.html" class="p-6 bg-slate-50 dark:bg-[#1a1a1a] rounded-2xl border border-slate-200 dark:border-white/5 hover:border-accent/50 transition-all">
                     <h3 class="text-xl font-bold text-accent mb-2">📡 API & SDK</h3>
                     <p class="text-sm opacity-70">Explore the REST endpoints and the TypeScript SDK.</p>
                 </a>
@@ -123,5 +288,8 @@ models:
     <footer class="mt-24 pb-12 text-center opacity-40 text-sm">
         <p>&copy; 2024 Miri from Chur. 🤖</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
 </body>
 </html>

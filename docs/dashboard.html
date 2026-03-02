@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miri Docs - Skills</title>
+    <title>Miri Docs - Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
@@ -77,9 +77,9 @@
                 <div class="hidden md:flex gap-4 text-sm font-medium">
                     <a href="getting-started.html" class="hover:text-accent">Start</a>
                     <a href="architecture.html" class="hover:text-accent">Architecture</a>
-                    <a href="dashboard.html" class="hover:text-accent">Dashboard</a>
+                    <a href="dashboard.html" class="text-accent underline">Dashboard</a>
                     <a href="api.html" class="hover:text-accent">API</a>
-                    <a href="skills.html" class="text-accent underline">Skills</a>
+                    <a href="skills.html" class="hover:text-accent">Skills</a>
                     <a href="tools.html" class="hover:text-accent">Tools</a>
                     <a href="policies.html" class="hover:text-accent">Policies</a>
                 </div>
@@ -97,70 +97,84 @@
 
     <main class="max-w-4xl mx-auto px-6 py-12">
         <article class="prose dark:prose-invert max-w-none">
-            <h1>🎯 Skills System</h1>
-            <p>Skills are stored in <code>~/.miri/skills/</code> and allow for dynamic extension of the agent's capabilities.</p>
+            <h1>📊 Miri Dashboard</h1>
+            <p>A modern, high-performance web dashboard built with <strong>SvelteKit 5</strong> and <strong>Tailwind CSS 4</strong> for interacting with and managing the Miri Autonomous Agent.</p>
 
-            <h2>Skill Formats</h2>
+            <div class="bg-slate-50 dark:bg-[#1a1a1a] p-8 rounded-[2.5rem] border border-slate-200 dark:border-accent/20 my-12">
+                <h3 class="mt-0 text-accent">Real-time Reactive Interface</h3>
+                <p class="text-sm opacity-70 mb-0">The dashboard leverages low-latency WebSockets and the @miri/sdk to provide a seamless, real-time experience for monitoring and interacting with the agent.</p>
+            </div>
+
+            <h2>Core Sections</h2>
+            
+            <h3>1. Admin Dashboard (Overview)</h3>
+            <p>The primary control center for the Miri ecosystem. It provides a comprehensive view of the server's current state:</p>
             <ul>
-                <li><strong>Single-file (.md)</strong>: A plain Markdown file with YAML frontmatter. Recommended for most skills.</li>
-                <li><strong>Directory-based</strong>: A folder containing a <code>SKILL.md</code> file. Used for skills with bundled scripts or assets.</li>
-                <li><strong>Hybrid</strong>: A <code>.md</code> file with a matching directory for a <code>scripts/</code> subdirectory.</li>
+                <li><strong>Server Health</strong>: Real-time monitoring of server status, uptime, and resource usage.</li>
+                <li><strong>Active Sessions</strong>: View and manage all ongoing chat sessions, including specialized task sessions.</li>
+                <li><strong>Human Profiles</strong>: Inspect and manage the stored knowledge about users (Human LTM).</li>
+                <li><strong>System Configuration</strong>: Visual overview of the active <code>config.yaml</code> settings.</li>
             </ul>
 
-            <pre><code class="language-yaml">---
-name: Web Analysis
-description: Advanced web page analysis instructions.
-version: 1.2.0
-tags: [web, scraper]
----
-# Instructions
-When performing web analysis...</code></pre>
-
-            <h2>Core Skills & Auto-Activation</h2>
-            <p>Miri bootstraps core skills from its templates. These are <strong>automatically activated</strong> in the primary session (<code>miri:main:agent</code>):</p>
+            <h3>2. Reactive Prompt (Chat)</h3>
+            <p>A sophisticated chat interface designed for direct interaction with the Miri agent:</p>
             <ul>
-                <li><code>learn</code>: The primary skill for discovery and installation via <a href="https://agentskill.sh">agentskill.sh</a>.</li>
-                <li><code>skill_creator</code>: Helps the agent design and write new skills for itself.</li>
+                <li><strong>Streaming Responses</strong>: High-speed SSE/WebSocket streaming for real-time thought markers and agent output.</li>
+                <li><strong>Thought Visualization</strong>: View the agent's internal reasoning process (Mole-Syn traces) as they happen.</li>
+                <li><strong>Tool Execution Logs</strong>: Real-time feedback on tool calls, including file operations and web searches.</li>
+                <li><strong>Multi-Session Support</strong>: Switch between different sessions (e.g., <code>miri:main:agent</code>) with ease.</li>
             </ul>
 
-            <h2>Script Inference</h2>
-            <p>Miri can automatically turn scripts into agent tools. Supported extensions: <code>.sh</code>, <code>.py</code>, <code>.js</code>.</p>
+            <h3>3. The Brain (Memory Viewer)</h3>
+            <p>A dedicated interface for visualizing and managing Miri's long-term memory:</p>
             <ul>
-                <li><strong>Global Scripts</strong>: Located in <code>scripts/</code> in the storage folder.</li>
-                <li><strong>Skill Scripts</strong>: Located in a skill's <code>scripts/</code> subdirectory (e.g., <code>~/.miri/skills/my-skill/scripts/</code>).</li>
+                <li><strong>Facts Explorer</strong>: Search and filter the atomic facts extracted by the maintenance loop.</li>
+                <li><strong>Summaries View</strong>: Review the narrative context summaries created from past interactions.</li>
+                <li><strong>Topology Analysis</strong>: Inspect the stability scores and bond distributions (D, R, E) of the agent's reasoning.</li>
+                <li><strong>Priority Sorting</strong>: Sort memories by confidence, access count, or topology source to understand what the agent values most.</li>
             </ul>
 
-            <h2>Management</h2>
-            <p>Manage and inspect skills via the Admin API (Basic Auth):</p>
+            <h3>4. Skills Management</h3>
+            <p>Manage and discover new capabilities for the agent:</p>
             <ul>
-                <li><code>GET /api/admin/v1/skills</code>: List all installed skills with their metadata.</li>
-                <li><code>GET /api/admin/v1/skills/{name}</code>: Retrieve the full details and content of a specific skill.</li>
-                <li><code>GET /api/admin/v1/skills/commands</code>: List all available agent commands (tools), including inferred scripts.</li>
-                <li><code>DELETE /api/admin/v1/skills/{name}</code>: Uninstall and delete a local skill.</li>
+                <li><strong>Installed Skills</strong>: List and inspect all locally available skills and inferred scripts.</li>
+                <li><strong>Command Reference</strong>: A real-time list of all available agent tools and their descriptions.</li>
             </ul>
 
+            <h2>Technical Stack</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Action</th>
-                        <th>Tool / Command</th>
+                        <th>Layer</th>
+                        <th>Technology</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Install/Search</td>
-                        <td><code>/learn &lt;query&gt;</code></td>
+                        <td><strong>Framework</strong></td>
+                        <td>SvelteKit 5 (SSR + Hydration)</td>
                     </tr>
                     <tr>
-                        <td>Activate</td>
-                        <td><code>skill_use &lt;name&gt;</code></td>
+                        <td><strong>Styling</strong></td>
+                        <td>Tailwind CSS 4 + shadcn-svelte</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication</strong></td>
+                        <td>WebSockets + Axios (@miri/sdk)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Icons</strong></td>
+                        <td>Lucide Svelte</td>
                     </tr>
                 </tbody>
             </table>
 
+            <h2>Setup & Configuration</h2>
+            <p>The dashboard is configured via environment variables in a <code>.env</code> file. For detailed setup instructions, including local SDK linking, see the <a href="getting-started.html#2-miri-dashboard-setup">Getting Started</a> guide.</p>
+
             <div class="flex justify-between border-t border-white/10 pt-8 mt-12">
+                <a href="getting-started.html" class="text-accent font-bold italic underline">🚀 Setup Guide</a>
                 <a href="architecture.html" class="text-accent font-bold italic underline">🏗️ Architecture</a>
-                <a href="tools.html" class="text-accent font-bold italic underline">🔧 Tools</a>
             </div>
         </article>
     </main>
@@ -169,6 +183,5 @@ When performing web analysis...</code></pre>
         <p>&copy; 2024 Miri from Chur. 🤖</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
 </body>
 </html>

@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miri Docs - Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,55 +15,94 @@
             theme: {
                 extend: {
                     colors: {
-                        accent: '#00ff88',
-                        'accent-hover': '#00cc66',
+                        accent: '#6366f1',
+                        'accent-hover': '#4f46e5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
+    <script>
+        // Theme Toggle Logic
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
     <style type="text/css">
-        .prose h1 { @apply text-4xl font-bold text-accent mb-6; }
-        .prose h2 { @apply text-2xl font-semibold text-accent mt-8 mb-4 border-b border-accent/20 pb-2; }
-        .prose p { @apply mb-4 leading-relaxed; }
-        .prose ul { @apply list-disc list-inside mb-4 space-y-2; }
-        .prose ol { @apply list-decimal list-inside mb-4 space-y-2; }
-        .prose code { @apply bg-[#1a1a1a] px-1.5 py-0.5 rounded text-accent font-mono text-sm; }
-        .prose pre { @apply bg-[#1a1a1a] p-4 rounded-xl border border-white/10 overflow-x-auto mb-6; }
-        .prose pre code { @apply bg-transparent p-0 text-[#e0e0e0]; }
-        .prose table { @apply w-full border-collapse mb-8; }
-        .prose th { @apply p-3 text-left border-b-2 border-accent text-accent font-bold bg-[#1a1a1a]; }
-        .prose td { @apply p-3 border-b border-white/5; }
-        .prose tr:hover { @apply bg-white/5; }
-        .prose a { @apply text-accent hover:underline; }
+        .prose { @apply text-slate-900 dark:text-slate-200; line-height: 1.75; letter-spacing: -0.01em; }
+        .prose h1 { @apply text-4xl font-bold text-accent mb-6; letter-spacing: -0.02em; }
+        .prose h2 { @apply text-2xl font-semibold text-accent mt-12 mb-6 border-b border-accent/20 pb-2; letter-spacing: -0.02em; }
+        .prose h3 { @apply text-xl font-semibold text-accent mt-8 mb-4; letter-spacing: -0.01em; }
+        .prose p { @apply mb-6; }
+        .prose ul { @apply list-disc list-outside mb-6 ml-6 space-y-3; }
+        .prose ol { @apply list-decimal list-outside mb-6 ml-6 space-y-3; }
+        .prose code { @apply bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded text-indigo-600 dark:text-indigo-400 font-mono text-sm; }
+        .prose pre { @apply bg-slate-900 p-5 rounded-2xl border border-white/10 shadow-xl overflow-x-auto mb-8 !important; }
+        .prose pre code { @apply bg-transparent p-0 text-slate-100 !important; }
+        .prose table { @apply w-full border-collapse mb-10 overflow-hidden rounded-xl border border-slate-200 dark:border-white/10; }
+        .prose th { @apply p-4 text-left border-b-2 border-accent text-accent font-bold bg-slate-100 dark:bg-white/5; }
+        .prose td { @apply p-4 border-b border-slate-200 dark:border-white/5; }
+        .prose tr:last-child td { @apply border-b-0; }
+        .prose tr:hover { @apply bg-slate-50 dark:bg-white/5; }
+        .prose a { @apply text-accent hover:underline decoration-2 underline-offset-4; }
+        .prose strong { @apply font-bold text-slate-900 dark:text-white; }
+        .prose blockquote { @apply border-l-4 border-accent bg-slate-50 dark:bg-white/5 p-4 rounded-r-lg italic mb-6; }
     </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
-<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans min-h-screen">
+<body class="bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-[#e0e0e0] font-sans min-h-screen transition-colors duration-300">
     
-    <nav class="bg-[#1a1a1a] border-b border-accent/20 sticky top-0 z-50">
+    <nav class="bg-slate-100/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border-b border-slate-200 dark:border-accent/20 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
                 <span>←</span> Back to Home
             </a>
-            <div class="flex gap-4 text-sm font-medium">
-                <a href="getting-started.html" class="hover:text-accent">Start</a>
-                <a href="architecture.html" class="hover:text-accent">Architecture</a>
-                <a href="api.html" class="hover:text-accent">API</a>
-                <a href="skills.html" class="hover:text-accent">Skills</a>
-                <a href="tools.html" class="text-accent underline">Tools</a>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex gap-4 text-sm font-medium">
+                    <a href="getting-started.html" class="hover:text-accent">Start</a>
+                    <a href="architecture.html" class="hover:text-accent">Architecture</a>
+                    <a href="dashboard.html" class="hover:text-accent">Dashboard</a>
+                    <a href="api.html" class="hover:text-accent">API</a>
+                    <a href="skills.html" class="hover:text-accent">Skills</a>
+                    <a href="tools.html" class="text-accent underline">Tools</a>
+                    <a href="policies.html" class="hover:text-accent">Policies</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-[#0a0a0a] hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-[#0a0a0a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        <article class="prose prose-invert max-w-none">
+        <article class="prose dark:prose-invert max-w-none">
             <h1>🔧 Agent Tools</h1>
             <p>Miri uses a ReAct loop to execute tools and solve tasks autonomously.</p>
 
             <h2>Sandboxing</h2>
             <p>For security and organization, all tool-initiated file operations and script executions are automatically redirected to a sandboxed directory:</p>
-            <pre><code>~/.miri/generated/</code></pre>
+            <pre><code class="language-bash">~/.miri/generated/</code></pre>
 
             <h2>Available Tools</h2>
             <table>
@@ -88,13 +131,13 @@
                     </tr>
                     <tr>
                         <td><code>file_manager</code></td>
-                        <td>List, read, and share files from the sandbox.</td>
-                        <td><code>action</code>, <code>path</code></td>
+                        <td>List and share files from the sandbox.</td>
+                        <td><code>action</code> ('list', 'share'), <code>path</code>, <code>channel</code>, <code>device</code></td>
                     </tr>
                     <tr>
                         <td><code>task_manager</code></td>
                         <td>Schedule and manage recurring cron tasks.</td>
-                        <td><code>action</code>, <code>cron</code>, <code>prompt</code></td>
+                        <td><code>action</code> ('add', 'list', 'delete'), <code>cron</code> (standard expression), <code>prompt</code></td>
                     </tr>
                     <tr>
                         <td><code>skill_use</code></td>
@@ -114,6 +157,46 @@
                 </tbody>
             </table>
 
+            <h2>Recurring Tasks</h2>
+            <p>Miri features a built-in <strong>CronManager</strong> that allows the agent to schedule and execute tasks autonomously. These tasks are persisted and survive server restarts.</p>
+            
+            <div class="bg-indigo-600/10 border border-indigo-500/20 p-6 rounded-2xl mb-8">
+                <h3 class="mt-0 text-indigo-400">📅 Task Manager Tool</h3>
+                <p>The <code>task_manager</code> tool is the primary interface for the agent to manage these schedules.</p>
+                <ul class="text-sm space-y-2 mb-0">
+                    <li><strong>Add</strong>: Create a new task with a name, cron expression, and prompt.</li>
+                    <li><strong>List</strong>: View all currently scheduled tasks and their IDs.</li>
+                    <li><strong>Delete</strong>: Remove a task by its unique ID.</li>
+                </ul>
+            </div>
+
+            <h3>Reporting & Notifications</h3>
+            <p>When a task executes, its results can be reported back to several targets:</p>
+            <ul>
+                <li><strong>Session</strong>: Results are injected back into the <code>miri:main:agent</code> session.</li>
+                <li><strong>WebSocket</strong>: Active dashboard clients receive real-time push notifications of task completion.</li>
+                <li><strong>Channels</strong>: Task results can be sent directly to WhatsApp or IRC.</li>
+            </ul>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>API Endpoint (Admin)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>List Tasks</td>
+                        <td><code>GET /api/admin/v1/tasks</code></td>
+                    </tr>
+                    <tr>
+                        <td>Task Details</td>
+                        <td><code>GET /api/admin/v1/tasks/{id}</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="flex justify-between border-t border-white/10 pt-8 mt-12">
                 <a href="getting-started.html" class="text-accent font-bold italic underline">🚀 Getting Started</a>
                 <a href="skills.html" class="text-accent font-bold italic underline">🎯 Skills</a>
@@ -124,5 +207,7 @@
     <footer class="mt-24 pb-12 text-center opacity-40 text-sm">
         <p>&copy; 2024 Miri from Chur. 🤖</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 </body>
 </html>

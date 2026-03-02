@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Miri Docs - Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,92 +15,191 @@
             theme: {
                 extend: {
                     colors: {
-                        accent: '#00ff88',
-                        'accent-hover': '#00cc66',
+                        accent: '#6366f1',
+                        'accent-hover': '#4f46e5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
         }
     </script>
+    <script>
+        // Theme Toggle Logic
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
     <style type="text/css">
-        .prose h1 { @apply text-4xl font-bold text-accent mb-6; }
-        .prose h2 { @apply text-2xl font-semibold text-accent mt-8 mb-4 border-b border-accent/20 pb-2; }
-        .prose h3 { @apply text-xl font-semibold text-accent mt-6 mb-2; }
-        .prose p { @apply mb-4 leading-relaxed; }
-        .prose ul { @apply list-disc list-inside mb-4 space-y-2; }
-        .prose code { @apply bg-[#1a1a1a] px-1.5 py-0.5 rounded text-accent font-mono text-sm; }
-        .prose pre { @apply bg-[#1a1a1a] p-4 rounded-xl border border-white/10 overflow-x-auto mb-6; }
-        .prose pre code { @apply bg-transparent p-0 text-[#e0e0e0]; }
-        .prose a { @apply text-accent hover:underline; }
+        .prose { @apply text-slate-900 dark:text-slate-200; line-height: 1.75; letter-spacing: -0.01em; }
+        .prose h1 { @apply text-4xl font-bold text-accent mb-6; letter-spacing: -0.02em; }
+        .prose h2 { @apply text-2xl font-semibold text-accent mt-12 mb-6 border-b border-accent/20 pb-2; letter-spacing: -0.02em; }
+        .prose h3 { @apply text-xl font-semibold text-accent mt-8 mb-4; letter-spacing: -0.01em; }
+        .prose p { @apply mb-6; }
+        .prose ul { @apply list-disc list-outside mb-6 ml-6 space-y-3; }
+        .prose ol { @apply list-decimal list-outside mb-6 ml-6 space-y-3; }
+        .prose code { @apply bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded text-indigo-600 dark:text-indigo-400 font-mono text-sm; }
+        .prose pre { @apply bg-slate-900 p-5 rounded-2xl border border-white/10 shadow-xl overflow-x-auto mb-8 !important; }
+        .prose pre code { @apply bg-transparent p-0 text-slate-100 !important; }
+        .prose table { @apply w-full border-collapse mb-10 overflow-hidden rounded-xl border border-slate-200 dark:border-white/10; }
+        .prose th { @apply p-4 text-left border-b-2 border-accent text-accent font-bold bg-slate-100 dark:bg-white/5; }
+        .prose td { @apply p-4 border-b border-slate-200 dark:border-white/5; }
+        .prose tr:last-child td { @apply border-b-0; }
+        .prose tr:hover { @apply bg-slate-50 dark:bg-white/5; }
+        .prose a { @apply text-accent hover:underline decoration-2 underline-offset-4; }
+        .prose strong { @apply font-bold text-slate-900 dark:text-white; }
+        .prose blockquote { @apply border-l-4 border-accent bg-slate-50 dark:bg-white/5 p-4 rounded-r-lg italic mb-6; }
     </style>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 </head>
-<body class="bg-[#0a0a0a] text-[#e0e0e0] font-sans min-h-screen">
+<body class="bg-white dark:bg-[#0a0a0a] text-slate-900 dark:text-[#e0e0e0] font-sans min-h-screen transition-colors duration-300">
     
-    <nav class="bg-[#1a1a1a] border-b border-accent/20 sticky top-0 z-50">
+    <nav class="bg-slate-100/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border-b border-slate-200 dark:border-accent/20 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="../index.html" class="flex items-center gap-2 text-accent font-bold hover:scale-105 transition-transform">
                 <span>←</span> Back to Home
             </a>
-            <div class="flex gap-4 text-sm font-medium">
-                <a href="getting-started.html" class="hover:text-accent">Start</a>
-                <a href="architecture.html" class="text-accent underline">Architecture</a>
-                <a href="api.html" class="hover:text-accent">API</a>
-                <a href="skills.html" class="hover:text-accent">Skills</a>
-                <a href="tools.html" class="hover:text-accent">Tools</a>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex gap-4 text-sm font-medium">
+                    <a href="getting-started.html" class="hover:text-accent">Start</a>
+                    <a href="architecture.html" class="hover:text-accent underline">Architecture</a>
+                    <a href="dashboard.html" class="hover:text-accent">Dashboard</a>
+                    <a href="api.html" class="hover:text-accent">API</a>
+                    <a href="skills.html" class="hover:text-accent">Skills</a>
+                    <a href="tools.html" class="hover:text-accent">Tools</a>
+                    <a href="policies.html" class="hover:text-accent">Policies</a>
+                </div>
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-200 dark:bg-[#0a0a0a] hover:bg-accent dark:hover:bg-accent transition-all group" title="Toggle Theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block text-accent group-hover:text-[#0a0a0a]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                    </svg>
+                </button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-12">
-        <article class="prose prose-invert max-w-none">
+        <article class="prose dark:prose-invert max-w-none">
             <h1>🏗️ Architecture Overview</h1>
             <p>Miri is designed as a modular, autonomous system with a focus on local execution, persistent memory, and extensibility.</p>
 
-            <div class="bg-[#1a1a1a] p-8 rounded-[2.5rem] border border-accent/20 my-12">
-                <h3 class="mt-0">System Topology</h3>
+            <div class="bg-slate-50 dark:bg-[#1a1a1a] p-8 rounded-[2.5rem] border border-slate-200 dark:border-accent/20 my-12">
+                <h3 class="mt-0">The Eino Graph: Autonomous Flow</h3>
+                <p class="text-sm opacity-70 mb-6">Miri's core logic is modeled as a directed graph using the Eino framework. Each interaction traverses these specialized nodes:</p>
                 <ul class="space-y-4 list-none">
                     <li class="flex items-start gap-3">
                         <span class="text-accent font-bold text-lg">1.</span>
                         <div>
-                            <strong>Client Layer</strong>: Web Dashboard (SvelteKit) and TypeScript SDK interacting via HTTP/WS.
+                            <strong>Retriever Node</strong>: Proactively queries the <strong>Brain</strong> for relevant facts and summaries based on the user's prompt. It injects this context directly into the system message.
                         </div>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-accent font-bold text-lg">2.</span>
                         <div>
-                            <strong>Gateway</strong>: Orchestrates the REST/WebSocket server (Gin), Multi-channel messaging (WhatsApp, IRC), and core Agent lifecycle.
+                            <strong>Agent Node</strong>: The central ReAct (Reasoning + Acting) loop. It evaluates the prompt + context, decides on tool calls, executes them, and iterates until a final answer is reached.
                         </div>
                     </li>
                     <li class="flex items-start gap-3">
                         <span class="text-accent font-bold text-lg">3.</span>
                         <div>
-                            <strong>Engine (Eino)</strong>: A graph-based ReAct engine that handles reasoning loops, tool calls, and checkpointing.
-                        </div>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="text-accent font-bold text-lg">4.</span>
-                        <div>
-                            <strong>The Brain</strong>: Asynchronous cognitive maintenance engine managing long-term memory (Vector DB) and reasoning quality (Mole-Syn).
+                            <strong>Brain Node</strong>: An asynchronous post-processor. It captures the interaction, updates the message buffer, monitors token usage, and triggers the <strong>Maintenance Loop</strong>.
                         </div>
                     </li>
                 </ul>
             </div>
 
-            <h2>The Brain: Cognitive Architecture</h2>
-            <p>Miri's memory isn't just a list of messages; it's a dual-layered system powered by <code>chromem-go</code>.</p>
+            <h2>Cognitive Architecture: The Soul & The Brain</h2>
+            <p>Miri distinguishes between its internal drive ("Soul") and its acquired knowledge ("Brain").</p>
+            
+            <h3>The Soul (<code>soul.md</code>)</h3>
+            <p>The Soul defines Miri's identity, tone, and fundamental behavior. It is bootstrapped from a template on first run and remains a persistent part of every interaction's system context.</p>
             <ul>
-                <li><strong>Facts</strong>: Atomic pieces of knowledge and user preferences.</li>
-                <li><strong>Summaries</strong>: Narrative records of conversation segments for continuity.</li>
-                <li><strong>Mole-Syn</strong>: Advanced reasoning framework that models thoughts as interconnected "bonds" (Deep Reasoning, Self-Reflection, Exploration).</li>
+                <li><strong>Identity</strong>: A dry, slightly sarcastic assistant from Chur who prefers direct action over filler words.</li>
+                <li><strong>Opinionated</strong>: Allowed to have preferences and disagree with the user to feel like a "being" rather than a tool.</li>
+                <li><strong>Redaction</strong>: Automatically sanitizes sensitive data (API keys, UUIDs, emails) from both inputs and outputs.</li>
             </ul>
 
-            <h2>Multi-Channel Support</h2>
-            <p>Miri can be controlled via various interfaces beyond the dashboard:</p>
+            <h3>The Brain: Long-Term Memory (LTM)</h3>
+            <p>Miri's memory isn't just a list of messages; it's a dual-layered system powered by <code>chromem-go</code> with a sophisticated maintenance loop.</p>
+            
+            <h3>Memory Layers</h3>
             <ul>
-                <li><strong>WhatsApp</strong>: Scan a QR code to interact with Miri via mobile.</li>
-                <li><strong>IRC</strong>: Connect Miri to your favorite IRC channels.</li>
-                <li><strong>CLI</strong>: Direct interaction via shell.</li>
+                <li><strong>Facts</strong>: Atomic pieces of world knowledge, user preferences, and specific events (e.g., "The user prefers coffee").</li>
+                <li><strong>Summaries</strong>: Narrative records of conversation segments, providing context for long-term continuity and preventing "amnesia" when context windows are cleared.</li>
+            </ul>
+
+            <h3>Mole-Syn: Molecular Structure of Thought</h3>
+            <p>Mole-Syn is Miri's reasoning topology framework that models agent thoughts as a graph of interconnected nodes and "bonds". It helps visualize how the agent "thinks".</p>
+            <ul>
+                <li><strong>D (Deep Reasoning)</strong>: Covalent-like, direct logical deductions. Used for complex problem solving.</li>
+                <li><strong>R (Self-Reflection)</strong>: Hydrogen-like, consistency checks and error correction. The agent questioning its own logic.</li>
+                <li><strong>E (Self-Exploration)</strong>: Van der Waals-like, hypothesis testing and branching. Searching for creative solutions.</li>
+            </ul>
+            <p>Each interaction produces a <code>TopologyScore</code> (0-100) based on the stability of these bonds, which is visible in the Admin Dashboard.</p>
+
+            <h2>Cognitive Maintenance Loop</h2>
+            <p>The Brain performs continuous self-optimization to maintain high memory quality and efficient retrieval. Maintenance is triggered by several events:</p>
+            <ul>
+                <li><code>interaction_threshold</code>: Every 100 interaction turns.</li>
+                <li><code>context_usage_high</code>: When the message buffer reaches 60% of the context window.</li>
+                <li><code>lifecycle_events</code>: On startup, shutdown, and session resets.</li>
+            </ul>
+
+            <h3>Process Steps</h3>
+            <ol>
+                <li><strong>Fact Extraction</strong>: Automatically promotes salient information from interactions to standalone facts.</li>
+                <li><strong>Self-Reflection</strong>: Analyzes session history to identify core insights or contradictions.</li>
+                <li><strong>Topology Analysis</strong>: Maps the reasoning trace using the Mole-Syn framework.</li>
+                <li><strong>Compaction</strong>: Merges similar facts and consolidates fragmented summaries via semantic analysis.</li>
+            </ol>
+
+            <h2>Multi-Channel Support</h2>
+            <p>Miri can be controlled via various communication channels beyond the dashboard, allowing for seamless integration into existing workflows.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-white/10">
+                    <h3 class="mt-0">📱 WhatsApp</h3>
+                    <p class="text-sm opacity-80 mb-4">Interact with Miri via mobile. Setup is as simple as scanning a QR code from the server console or TUI.</p>
+                    <ul class="text-xs space-y-2 opacity-70 list-none ml-0">
+                        <li class="flex items-center gap-2"><span>✅</span> JID-based filtering</li>
+                        <li class="flex items-center gap-2"><span>✅</span> Media/File support</li>
+                        <li class="flex items-center gap-2"><span>✅</span> Persistent session DB</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 dark:bg-white/5 p-6 rounded-2xl border border-slate-200 dark:border-white/10">
+                    <h3 class="mt-0">💬 IRC</h3>
+                    <p class="text-sm opacity-80 mb-4">Connect Miri to your favorite IRC channels for collaborative agentic workflows.</p>
+                    <ul class="text-xs space-y-2 opacity-70 list-none ml-0">
+                        <li class="flex items-center gap-2"><span>✅</span> TLS Support</li>
+                        <li class="flex items-center gap-2"><span>✅</span> NickServ Auth</li>
+                        <li class="flex items-center gap-2"><span>✅</span> Channel Allowlisting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Channel Security</h3>
+            <p>All channels follow a unified security policy to prevent unauthorized access:</p>
+            <ul>
+                <li><strong>Allowlist</strong>: If defined, only these senders can trigger the AI.</li>
+                <li><strong>Blocklist</strong>: Senders here are silently ignored.</li>
+                <li><strong>Default Reply</strong>: Unrecognized senders receive a polite "thanks for contact" message.</li>
             </ul>
 
             <h2>Persistence & Sandboxing</h2>
@@ -112,5 +215,6 @@
     <footer class="mt-24 pb-12 text-center opacity-40 text-sm">
         <p>&copy; 2024 Miri from Chur. 🤖</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 </body>
 </html>
