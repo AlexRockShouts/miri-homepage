@@ -1,13 +1,16 @@
-# Tools Documentation
+# 🔧 Tools List
 
-| Tool | Description |
-|------|-------------|
-| web_search | Search the web. |
-| web_fetch | Fetch URL content. |
-| execute_command | Run shell commands. |
-| skill_use | Load skills. |
-| task_manager | Manage cron tasks. |
-| file_manager | List/share files. |
-| grokipedia | Wikipedia lookup. |
+| Tool | Description | Key Param |
+|------|-------------|-----------|
+| web_search | Current info | query |
+| web_fetch | Page content | url |
+| execute_command | Shell | command |
+| skill_use | Load skill | skill_name |
+| task_manager | Cron tasks | action |
+| file_manager | Files | action=path |
+| grokipedia | Wiki facts | query |
+| skill_remove | Uninstall | skill_name |
 
-See source for params.
+Params see Spec.
+
+[Getting Started](/getting-started.md)
